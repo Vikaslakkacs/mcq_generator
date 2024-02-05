@@ -3,7 +3,7 @@ import json
 import traceback
 import pandas as pd
 from dotenv import load_dotenv
-##from src.mcqgenerator.utils import read_file, get_table_data
+from src.mcqgenerator.utils import read_file, get_table_data
 from src.mcqgenerator.logger import logging
 
 ##Importing necessary packages from langchain
@@ -39,7 +39,7 @@ quiz_generation_prompt= PromptTemplate(
     template= TEMPLATE
 )
 
-logger.info("Created Quiz generation prompt")
+logging.info("Created Quiz generation prompt")
 
 quiz_chain=LLMChain(llm=llm, prompt=quiz_generation_prompt, output_key="quiz", verbose=True)
 
