@@ -16,7 +16,7 @@ from langchain.chains import SequentialChain
 load_dotenv()
 
 key= os.getenv("OPENAI_API_KEY")
-
+print(key)
 ##Create Chat openai object
 llm= ChatOpenAI(openai_api_key= key, model_name= "gpt-3.5-turbo", temperature=0.7)
 
