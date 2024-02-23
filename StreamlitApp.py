@@ -11,7 +11,7 @@ from src.mcqgenerator.logger import logging
 
 
 ## loading Json file
-with open("/config/workspace/response.json", "r") as file:
+with open("/Users/vikaslakka/Desktop/FSDS/GenAI/mcq_generator/response.json", "r") as file:
     RESPONSE_JSON= json.load(file)
 
 # Creating title for app
@@ -20,10 +20,10 @@ st.title("MCQ creator Application with Langchain")
 ## Create a form using st.form
 with st.form("user_inputs"):
     # File upload
-    uploaded_file= st.file_uploader("upload a PDF of txt file")
-
+    uploaded_file= st.file_uploader("upload a PDF of txt file", type=['txt', 'csv', 'pdf'])
+    
     # input fields
-    mcq_count= st.text_input("No. of Mcqs", min_value= 3, max_value=50)
+    mcq_count= st.number_input("No. of Mcqs", min_value= 3, max_value=50)
 
     # Subject
     subject= st.text_input("Insert Subject", max_chars=20)
@@ -37,8 +37,9 @@ with st.form("user_inputs"):
     if button and uploaded_file is not None and mcq_count and subject and tone:
         with st.spinner("loading..."):
             try:
+                ##print(uploaded_file)
                 text= read_file(uploaded_file)
-                #Cunt tokens and cost of API call
+                #Count tokens and cost of API call
                 with get_openai_callback() as cb:
                     response= generate_evaluate_chain(
                         {
@@ -66,9 +67,9 @@ with st.form("user_inputs"):
                     if quiz is not None:
                         table_data= get_table_data(quiz)
                         if table_data is not None:
-                            df= pd.DataFrame(table_data)
+                            '''df= pd.DataFrame(table_data)
                             df.index= df.index+1
-                            st.table(df)
+                            st.table(df)'''
                             #Displaying review in text box
                             st.text_area(label="Review", value= response['review'])
                         else:
