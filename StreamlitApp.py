@@ -11,7 +11,7 @@ from src.mcqgenerator.logger import logging
 
 
 ## loading Json file
-with open("/Users/vikaslakka/Desktop/FSDS/GenAI/mcq_generator/response.json", "r") as file:
+with open("/config/workspace/response.json", "r") as file:
     RESPONSE_JSON= json.load(file)
 
 # Creating title for app
